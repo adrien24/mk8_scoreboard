@@ -8,10 +8,10 @@
             </span>
         </div>
         <div class="filter">
-            <button id="win" class="button-secondary" @click="toggleParam(true)">
+            <button id="wins" class="button-secondary" @click="toggleParam(true)">
                 Win
             </button><br>
-            <button id="courses" class="button" @click="toggleParam(false)">
+            <button id="course" class="button" @click="toggleParam(false)">
                 Courses
             </button>
         </div>
@@ -40,8 +40,8 @@
       toggleParam(param){
           if(this.para !== param){
               this.para = param
-              let win = document.getElementById("win");
-              let courses = document.getElementById("courses");
+              let win = document.getElementById("wins");
+              let courses = document.getElementById("course");
               
               if(param === true){
                   win.classList.add("button");
