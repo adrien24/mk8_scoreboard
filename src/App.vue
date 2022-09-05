@@ -23,11 +23,7 @@ body{
   margin: 0 0 0 0;
   padding: 0 0 69px 0;
   box-sizing: border-box;
-  
 }
-
-
-
 
 
 .button{

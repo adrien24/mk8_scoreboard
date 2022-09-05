@@ -4,10 +4,10 @@
             <canvas id="myChart"></canvas>
         </div>
         <div class="filter">
-            <button id="win" class="button-secondary" @click="toggleParam(true)">
+            <button id="win" class="button-secondary" @click="toggleParams(true)">
                 Win
             </button><br>
-            <button id="courses" class="button" @click="toggleParam(false)">
+            <button id="courses" class="button" @click="toggleParams(false)">
                 Courses
             </button>
         </div>
@@ -45,20 +45,20 @@
       },
     
       methods: {
-        toggleParam(para){
-            if(this.par !== para){
-                this.par = para
+        toggleParams(param){
+            if(this.par !== param){
+                this.par = param
                 let win = document.getElementById("win");
                 let courses = document.getElementById("courses");
                 
-                if(para === true){
+                if(param === true){
                     win.classList.add("button");
                     win.classList.remove("button-secondary");
                     courses.classList.remove("button");
                     courses.classList.add("button-secondary");
                     this.param = "Count_mk8_win";
                 }
-                else if(para === false){
+                else if(param === false){
                     courses.classList.add("button");
                     courses.classList.remove("button-secondary");
                     win.classList.remove("button");
