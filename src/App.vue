@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <router-view />
+   
+    <router-view><navbarVue /></router-view>
+    
   </div>
 </template>
 
 <script>
-  
+import navbarVue from "@/components/navbar.vue";
+
+export default {
+  components: {
+    navbarVue
+  }
+}
 </script>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
