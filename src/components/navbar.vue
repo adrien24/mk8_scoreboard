@@ -40,6 +40,7 @@ methods: {
         left: 0;
         background-color: #111111;
         border-top: 1px solid #fff;
+        
         // box-shadow: 0px 10px 30px rgba(69, 41, 236, 0.52);
        
         nav{
