@@ -24,9 +24,6 @@ const routes = [
     name: "Graphique",
     component: GraphiqueView,
   },
-
-
- 
 ]
 
 const router = new VueRouter({
