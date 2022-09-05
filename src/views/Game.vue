@@ -1,32 +1,31 @@
 <template>
   <div class="game">
-    <router-link to="/smash">
-      <div class="smash"></div>
-    </router-link>
-
-    <router-link to="/mk8">
-      <div class="mk8"></div>
-    </router-link>
+    <h1>Bienvenue 👋</h1>
+    <h2>Sélectionne un jeu</h2>
+    <router-link class="button-secondary" to="/smash">Super Smash Bros </router-link>
+    <router-link class="button-secondary" to="/mk8">Mario Kart </router-link>
   </div>
 </template>
 
-<style scoped>
-  .game{
+<style scoped lang="scss">
+.game{
   height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100) !important;
-}
-.smash {
-  height: 50vh;
-  background-image: url("../assets/img/smash.png");
-  background-position: center;
+  text-align:center;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
 
-  background-size: cover;
+  h1{
+    margin-bottom: 0
+  }
+
+  .button-secondary{
+    text-decoration: none;
+    margin-bottom: 25px;
+  }
+  
+
 }
 
-.mk8 {
-  height: 50vh;
-  background-image: url("../assets/img/mk8.webp");
-  background-position: center;
-  background-size: cover;
-}
 </style>

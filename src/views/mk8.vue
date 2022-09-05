@@ -1,49 +1,49 @@
 <template>
   <div id="mk8Page" class="mk8Page">
+    <img id="toad_img" src="@/assets/img/toad.png" alt="Champigngon">
     <div id="blur">
-    <h1>Ajouter un résultat</h1>
-    <button class="buttonAddPlayer" @click="togglePlayer()">
-      <font-awesome-icon icon="fa-solid fa-user-plus" class="addPlayers" />Add
-      player
-    </button>
-    <form @submit.prevent="callplayer()">
-      <div class="player" v-for="items in info" :key="items.info">
-        <input class="name_input name" v-model="items.Name" />
-        <select class="score_input" value="0">
-          <option>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>9</option>
-          <option>10</option>
-          <option>11</option>
-          <option>12</option>
-        </select>
-        <br /><br />
+        <h1>Ajouter un résultat</h1>
+        <button class="buttonAddPlayer" @click="togglePlayer()">
+          <font-awesome-icon icon="fa-solid fa-user-plus" class="addPlayers" />Add
+          player
+        </button>
+        <form @submit.prevent="callplayer()">
+            <div class="player" v-for="items in info" :key="items.info">
+                <input class="name_input name" v-model="items.Name" />
+                <select class="score_input" value="0">
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
+                <br /><br />
+            </div>
+            <button class="button">submit</button>
+        </form>
+    </div>
+
+  <div id="modal" class="modal">
+    <font-awesome-icon icon="fa-solid fa-xmark" id="cross" class="cross" @click="cross()"/>
+    <form @submit.prevent="addplayer()">
+      <div class="addPlayer player">
+        <input
+          id="addPlayer"
+          class="name_player name"
+          v-model="playerName"
+          placeholder="Player Name"
+        />
       </div>
-      <button class="button">submit</button>
-      <router-link to="/Graphique" class="button">Voir le classement</router-link>
+      <button class="add button-secondary">Add player</button>
     </form>
   </div>
-
-    <div id="modal" class="modal">
-      <font-awesome-icon icon="fa-solid fa-xmark" id="cross" class="cross" @click="cross()"/>
-      <form @submit.prevent="addplayer()">
-        <div class="addPlayer player">
-          <input
-            id="addPlayer"
-            class="name_player name"
-            v-model="playerName"
-            placeholder="Player Name"
-          />
-        </div>
-        <button class="add button-secondary">Add player</button>
-      </form>
-    </div>
 
     <navbarVue/>
   </div>
@@ -197,7 +197,13 @@ export default {
   align-items: center;
   flex-direction: column;
 
-
+  #toad_img{
+    position:absolute;
+    width: 150px;
+    z-index:-10;
+    bottom:10%;
+    left:-30px;
+  }
 
   .buttonAddPlayer {
     display: flex;
