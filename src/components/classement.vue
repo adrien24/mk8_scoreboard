@@ -1,10 +1,12 @@
 <template>
   <div class="mk8Classement">
+    
     <div
       class="classement"
       v-for="(items, index) in classement"
       :key="items.classement"
-    >
+      >
+      <router-link :to="{ name: 'profil', params: { id: items.id } }"> 
       <div class="placement">
         <p :id="'plc' + index">{{ index + 1 }}</p>
         <p>{{ items.Name }}</p>
@@ -16,7 +18,9 @@
         {{ items.Count_mk8_win }}
         <span class="pts">/ {{ items.Count_mk8_courses }}</span>
       </span>
+    </router-link>
     </div>
+  
     <div class="filter">
       <button id="wins" class="button-secondary" @click="toggleParam(true)">
         Win</button
@@ -93,6 +97,14 @@ export default {
   // border-bottom: solid 1px rgba(255, 255, 255, 0.2);
   padding: 10 px;
   align-items: center;
+
+  a{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
   .pts {
     font-size: 10px;
     color: rgba(255, 255, 255, 0.5);
@@ -105,14 +117,15 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      aspect-ratio: 1/1;
       border-radius: 5px;
-      border: 1px solid #fff;
+      border: 1px solid rgba(255, 255, 255, 0.5);
       background-color: transparent;
+      font-size: 14px;
     }
 
-    p:last-child{
+    p:last-child {
       margin-left: 20px;
     }
 
@@ -121,14 +134,15 @@ export default {
       border: none;
     }
     #plc1 {
-      background-color: #33239b!important;
+      background-color: #33239b !important;
       border: none;
     }
     #plc2 {
-      background-color: #271e5e!important;
+      background-color: #271e5e !important;
       border: none;
     }
   }
+}
 }
 .filter {
   display: flex;

@@ -7,7 +7,7 @@
         </div>
         <graphiqueVue id="view_graph"  />
         <classmentVue id="view_tab" class="display_none"/>
-        <navbarVue />
+        
     </div>
 </template>
 
@@ -15,14 +15,14 @@
 /* eslint-disable */
 import graphiqueVue from "@/components/graphique.vue";
 import classmentVue from '@/components/classement.vue'
-import navbarVue from "@/components/navbar.vue";
+
 
 export default {
 
     components:{
         graphiqueVue,
         classmentVue,
-        navbarVue
+      
     },
 
     data() {

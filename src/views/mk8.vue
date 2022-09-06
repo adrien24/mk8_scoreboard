@@ -1,7 +1,8 @@
 <template>
   <div id="mk8Page" class="mk8Page">
-    <img id="toad_img" src="@/assets/img/toad.png" alt="Champigngon">
+    
     <div id="blur">
+      <img id="toad_img" src="@/assets/img/toad.png" alt="Champigngon"/>
         <h1>Ajouter un résultat</h1>
         <button class="buttonAddPlayer" @click="togglePlayer()">
           <font-awesome-icon icon="fa-solid fa-user-plus" class="addPlayers" />Add
@@ -41,23 +42,21 @@
           placeholder="Player Name"
         />
       </div>
-      <button class="add button-secondary">Add player</button>
+      <button class="add button-secondary" @click="cross()">Add player</button>
     </form>
   </div>
 
-    <navbarVue/>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import navbarVue from "@/components/navbar.vue";
+
 
 export default {
 
-  components:{
-    navbarVue,
-  },
+  
 
   data() {
     return {
@@ -196,6 +195,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 25px;
 
   #toad_img{
     position:absolute;
@@ -216,8 +216,10 @@ export default {
     align-items: center;
     padding: 10px 20px;
     border-radius: 25px;
-    margin: 0 0 20px 5px;
+    margin: auto;
+    margin-bottom: 25px;
     border: 1px solid rgba(255, 255, 255, 0.22);
+    font-family: 'Orbitron';
 
     .addPlayers {
       display: flex;

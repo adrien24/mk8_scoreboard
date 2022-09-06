@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Game from "../views/Game.vue";
 import mk8 from "../views/mk8.vue";
 import GraphiqueView from "../views/GraphiqueView.vue"
+import profil from "../views/profil.vue"
 
 
 Vue.use(VueRouter)
@@ -23,6 +24,11 @@ const routes = [
     path: "/Graphique",
     name: "Graphique",
     component: GraphiqueView,
+  },
+  {
+    path: "/profil/:id",
+    name: "profil",
+    component: profil,
   },
 ]
 
