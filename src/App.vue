@@ -78,7 +78,7 @@ body {
   opacity: 0;
 }
 
-.logo {
+.logo{
   display: flex;
   align-items: center;
   padding: 10px 0 0 10px;

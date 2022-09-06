@@ -8,7 +8,7 @@
           <font-awesome-icon icon="fa-solid fa-user-plus" class="addPlayers" />Add
           player
         </button>
-        <form @submit.prevent="callplayer()">
+        <form @submit.prevent="callplayer()" id="score_form">
             <div class="player" v-for="items in info" :key="items.info">
                 <input class="name_input name" v-model="items.Name" />
                 <select class="score_input" value="0">
@@ -165,9 +165,16 @@ export default {
               )
               .then((res) => {
                 console.log(res);
+                this.resetScore();
               });
           });
       });
+    },
+
+    resetScore(){
+      const form = document.getElementById('score_form');
+      form.reset();
+      this.call();
     },
 
     addplayer() {
