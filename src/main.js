@@ -7,8 +7,8 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faUserPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
-library.add(faUserPlus, faXmark)
+import { faUserPlus, faXmark, faUserMinus } from '@fortawesome/free-solid-svg-icons'
+library.add(faUserPlus, faXmark, faUserMinus)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

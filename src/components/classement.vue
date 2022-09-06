@@ -23,7 +23,7 @@
   
     <div class="filter">
       <button id="wins" class="button-secondary" @click="toggleParam(true)">
-        Win</button
+        Victoires</button
       ><br />
       <button id="course" class="button" @click="toggleParam(false)">
         Courses

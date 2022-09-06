@@ -4,6 +4,7 @@ import Game from "../views/Game.vue";
 import mk8 from "../views/mk8.vue";
 import GraphiqueView from "../views/GraphiqueView.vue"
 import profil from "../views/profil.vue"
+import baby from "../views/baby.vue"
 
 
 Vue.use(VueRouter)
@@ -29,6 +30,11 @@ const routes = [
     path: "/profil/:id",
     name: "profil",
     component: profil,
+  },
+  {
+    path: "/baby",
+    name: "baby",
+    component: baby,
   },
 ]
 
