@@ -77,9 +77,11 @@
                 this.data_labels = []
                 this.labels = []
                 this.classement.forEach(item =>{
+                    if(item.Count_mk8_courses !== 0){
                     if(this.param === "Count_mk8"){this.data_labels.push(item.Count_mk8)}
                     else if(this.param === "Count_mk8_win"){this.data_labels.push(item.Count_mk8_win)}
                     this.labels.push(item.Name)
+                    }
                 })
                 
                 this.startGraph()

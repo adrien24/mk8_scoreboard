@@ -2,11 +2,11 @@
     <div class="GrapiqueView">
         <h1>Classement</h1>
         <div class="toggleview">
-            <span id="span_graph" class="active" @click="toggledisplay(true)">Graphique</span>
-            <span id="span_tab" @click="toggledisplay(false)">Tableau</span>
+            <span id="span_tab" class="active" @click="toggledisplay(false)">Tableau</span>
+            <span id="span_graph" @click="toggledisplay(true)">Graphique</span>
         </div>
-        <graphiqueVue id="view_graph"  />
-        <classmentVue id="view_tab" class="display_none"/>
+        <graphiqueVue id="view_graph"  class="display_none"/>
+        <classmentVue id="view_tab" />
         
     </div>
 </template>
@@ -27,7 +27,7 @@ export default {
 
     data() {
         return {
-          parFilter: true,
+          parFilter: false,
         };
       },
 

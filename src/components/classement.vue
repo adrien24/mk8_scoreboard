@@ -1,12 +1,12 @@
 <template>
   <div class="mk8Classement">
     
-    <div
+    <div 
       class="classement"
       v-for="(items, index) in classement"
       :key="items.classement"
       >
-      <router-link :to="{ name: 'profil', params: { id: items.id } }"> 
+      <router-link :to="{ name: 'profil', params: { id: items.id } }" v-if="items.Count_mk8_courses"> 
       <div class="placement">
         <p :id="'plc' + index">{{ index + 1 }}</p>
         <p>{{ items.Name }}</p>
@@ -74,6 +74,8 @@ export default {
         this.getClassement();
       }
     },
+
+
     getClassement() {
       axios
         .get(
@@ -81,7 +83,6 @@ export default {
         )
         .then((res) => {
           this.classement = res.data.data;
-          console.log(res);
         });
     },
   },
