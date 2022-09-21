@@ -14,9 +14,10 @@
     </div>
     <hr/>
     <div class="profil__bottom">
-        <p>🏆 Taux de victoires : <span>{{(profil.Count_mk8_win / profil.Count_mk8_courses)*100}} %</span></p>
-        <p>🍾 Place moyenne : <span>{{position}}</span></p>
-         <p>Points : <span>{{profil.Count_mk8}} / {{profil.Count_mk8_courses*15}} pts</span></p>
+        <p>🏆 Taux de victoires : <span>{{Math.round((profil.Count_mk8_win / profil.Count_mk8_courses)*100)}} %</span></p>
+        <p>🥇 Place moyenne : <span>{{position}}</span></p>
+        <p>🍾 Points : <span>{{profil.Count_mk8}} / {{profil.Count_mk8_courses*15}} pts</span></p>
+        <p>🏎️ Nombre de parties jouées : <span>{{profil.Count_mk8_courses}}</span></p>
     </div>
     
   </div>
@@ -41,21 +42,19 @@ export default {
     callProfil() {
       var urlcourante = document.location.href;
       const queue_url = urlcourante.substring(urlcourante.lastIndexOf("/") + 1);
-      console.log(queue_url);
+      
 
       axios
         .get("https://6ooontrv.directus.app/items/scoreboard/" + queue_url)
         .then((profil) => {
           this.profil = profil.data.data;
-          console.log(this.profil);
           this.calcPlace()
         });
     },
 
     calcPlace(){
         let point_moyen = this.profil.Count_mk8/this.profil.Count_mk8_courses
-        console.log(point_moyen);
-        if (point_moyen >= 13.5 && point_moyen < 15) {
+        if (point_moyen >= 13.5 && point_moyen <= 15) {
             this.position = "1er";
         } else if (point_moyen >= 11 && point_moyen < 13.5) {
             this.position = "2eme";

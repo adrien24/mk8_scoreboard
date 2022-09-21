@@ -5,6 +5,7 @@ import mk8 from "../views/mk8.vue";
 import GraphiqueView from "../views/GraphiqueView.vue"
 import profil from "../views/profil.vue"
 import baby from "../views/baby.vue"
+import versus from "../views/versus.vue"
 
 
 Vue.use(VueRouter)
@@ -32,9 +33,14 @@ const routes = [
     component: profil,
   },
   {
-    path: "/baby",
+    path: "/baby/:key",
     name: "baby",
     component: baby,
+  },
+  {
+    path: "/versus",
+    name: "versus",
+    component: versus,
   },
 ]
 

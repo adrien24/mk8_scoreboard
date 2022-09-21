@@ -2,7 +2,7 @@
   <div class="game">
     <h1>Bienvenue 👋</h1>
     <h2>Sélectionne un jeu</h2>
-    <router-link class="button-secondary" to="/baby">Super Smash Bros </router-link>
+    <router-link class="button-secondary" to="/versus">Baby foot</router-link>
     <router-link class="button-secondary" to="/mk8">Mario Kart </router-link>
     <img id="mk_img" src="@/assets/img/mario_home.png" alt="Mario Home">
   </div>

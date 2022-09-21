@@ -3,53 +3,40 @@
     <div id="blur">
       <img id="toad_img" src="@/assets/img/toad.png" alt="Champigngon" />
       <h1>Ajouter un résultat</h1>
-      <div class="button_player">
-        <button class="buttonAddPlayer" @click="togglePlayer()">
-          <font-awesome-icon
-            icon="fa-solid fa-user-plus"
-            class="addPlayers"
-          />Ajouter un joueur
-        </button>
-        <button class="buttonAddPlayer" @click="togglePlayer()">
-          <font-awesome-icon
-            icon="fa-solid fa-user-minus"
-            class="addPlayers"
-          />Supprimer un joueur
-        </button>
+      <div class="Versus__tableau">
+        <div class="Versus__tableau__player1">
+          <h3>{{ player.Name1 }}</h3>
+        </div>
+
+        <div class="Versus__tableau__score">
+          <h3>{{ setScore }} - {{ setScore2 }}</h3>
+        </div>
+
+        <div class="Versus__tableau__player1">
+          <h3>{{ player.Name2 }}</h3>
+        </div>
       </div>
-      <form @submit.prevent="callplayer()" id="score_form">
+      <form @submit.prevent="addScore()" id="score_form">
         <div class="player">
           <p class="name">Gagnant de la partie</p>
-          <select class="score_input" value="0">
-            <option v-for="items in info" :key="items.info">
-              {{ items.Name }}
+          <select class="score_input" v-model="winner">
+            <option>Choisir un joueur</option>
+            <option v-if="player.Name1">
+              {{ player.Name1 }}
+            </option>
+            <option v-if="player.Name2">
+              {{ player.Name2 }}
+            </option>
+            <option v-if="player.Name3">
+              {{ player.Name3 }}
+            </option>
+            <option v-if="player.Name4">
+              {{ player.Name4 }}
             </option>
           </select>
           <br /><br />
         </div>
-        <button class="button">submit</button>
-      </form>
-    </div>
-
-    <div id="modal" class="modal">
-      <font-awesome-icon
-        icon="fa-solid fa-xmark"
-        id="cross"
-        class="cross"
-        @click="cross()"
-      />
-      <form @submit.prevent="addplayer()">
-        <div class="addPlayer player">
-          <input
-            id="addPlayer"
-            class="name_player name"
-            v-model="playerName"
-            placeholder="Player Name"
-          />
-        </div>
-        <button class="add button-secondary" @click="cross()">
-          Ajouter un joueur
-        </button>
+        <button class="button">Envoyer</button>
       </form>
     </div>
   </div>
@@ -61,128 +48,90 @@ import axios from "axios";
 export default {
   data() {
     return {
-      info: "",
-      scorePlayer: 0,
-      points: 0,
-      player: "",
-      playerName: "",
-      id: "",
-      newPlayer: "",
+      player: [],
+      winner: "",
+      key: "",
+      winner1: "",
+      winner2: "",
+      setScore: 0,
+      setScore2: 0,
     };
   },
 
   mounted() {
-    this.call();
+    this.getplayer();
   },
 
   methods: {
-    togglePlayer() {
-      let modal = document.getElementById("modal");
-      let mk8 = document.getElementById("blur");
+    async getplayer() {
+      var urlcourante = document.location.href;
+      let key = urlcourante.substring(urlcourante.lastIndexOf("/") + 1);
 
-      modal.classList.add("show");
-      mk8.classList.add("mk8");
-    },
-
-    cross() {
-      let cross = document.getElementById("modal");
-      let mk8 = document.getElementById("blur");
-
-      cross.classList.remove("show");
-      mk8.classList.remove("mk8");
-    },
-
-    call() {
-      axios
-        .get(
-          "https://6ooontrv.directus.app/items/scoreboard?filter[role][_eq]=baby"
-        )
-        .then((info) => {
-          this.info = info.data.data;
-          console.log(this.info);
+      await axios
+        .get("https://6ooontrv.directus.app/items/baby?filter[key][_eq]=" + key)
+        .then((player) => {
+          this.player = player.data.data[0];
+          this.winner = "Choisir un joueur";
+          this.setScore = this.player.Score1;
+          this.setScore2 = this.player.Score2;
         });
     },
 
-    callplayer() {
-      const players = Array.from(document.querySelectorAll(".player"));
-      console.log(players);
-      alert("Les resultats ont été comptabilisé");
-      players.forEach((item) => {
-        const score = item.querySelector(".score_input").value;
-        console.log(score);
+    addScore() {
+      var urlcourante = document.location.href;
+      let key = urlcourante.substring(urlcourante.lastIndexOf("/") + 1);
 
-        axios
-          .get(
-            "https://6ooontrv.directus.app/items/scoreboard?filter[Name][_eq]=" +
-              score
-          )
-          .then((player) => {
-            console.log(player);
-            this.player = player.data.data[0];
-            var nb_baby_parties = this.player.Count_baby_parties;
-            var nb_win = this.player.Count_baby_win;
+      axios
+        .get(
+          "https://6ooontrv.directus.app/items/baby?filter[Name1][_eq]=" +
+            this.winner +
+            "&filter[key][_eq]=" +
+            key
+        )
+        .then((res) => {
+          this.winner1 = res.data.data[0];
+          axios.patch(
+            "https://6ooontrv.directus.app/items/baby/" + this.winner1.id,
+            {
+              Score1: this.winner1.Score1 + 1,
+            }
+          );
+        })
+        .then(() => {});
 
-            axios
-              .patch(
-                "https://6ooontrv.directus.app/items/scoreboard/" +
-                  this.player.id,
-                {
-                  Count_baby_parties: nb_baby_parties + 1,
-                  Count_baby_win: nb_win + 1,
-                }
-              )
-              .then((res) => {
-                console.log(res);
-                this.resetScore();
-              });
-          });
-      });
+      axios
+        .get(
+          "https://6ooontrv.directus.app/items/baby?filter[Name2][_eq]=" +
+            this.winner +
+            "&filter[key][_eq]=" +
+            key
+        )
+        .then((res) => {
+          this.winner2 = res.data.data[0];
+          axios.patch(
+            "https://6ooontrv.directus.app/items/baby/" + this.winner2.id,
+            {
+              Score2: this.winner2.Score2 + 1,
+            }
+          );
+        })
+        .then(() => {
+          alert("le score a bien été mis à jour");
+
+          if (this.winner === this.player.Name1) {
+            this.setScore += 1;
+            console.log("ok" + this.setScore);
+          } else if (this.winner === this.player.Name2) {
+            this.setScore2 += 1;
+            console.log("ok" + this.setScore2);
+          }
+        });
     },
 
     resetScore() {
       const form = document.getElementById("score_form");
       form.reset();
       this.call();
-    },
-
-    addplayer() {
-      const newPlayer = this.playerName;
-
-      axios
-        .get(
-          "https://6ooontrv.directus.app/items/scoreboard/?filter[Name][_eq]=" +
-            this.playerName
-        )
-        .then((id) => {
-          this.id = id.data.data;
-
-          axios.patch(
-            "https://6ooontrv.directus.app/items/scoreboard/" + this.id[0].id,
-            {
-              role: "baby",
-            }
-          );
-        })
-        .catch(function (error) {
-          console.log(error);
-          axios.post("https://6ooontrv.directus.app/items/scoreboard/", {
-            Name: newPlayer,
-            role: "baby",
-          });
-        })
-        .then(() => {
-          this.call();
-        });
-
-      // axios
-      //   .post("https://6ooontrv.directus.app/items/scoreboard/", {
-      //     Name: this.playerName,
-      //     role: 'baby'
-      //   })
-      //   .then((res) => {
-      //     this.call();
-      //     console.log(res);
-      //   });
     },
   },
 };
@@ -200,8 +149,9 @@ export default {
   flex-direction: column;
   margin-top: 25px;
 
-  #blur{
+  #blur {
     text-align: center;
+    width: 100%;
   }
 
   #toad_img {
@@ -221,7 +171,7 @@ export default {
   .buttonAddPlayer {
     display: flex;
     background: #343434;
-    font-size: 0.8rem;
+    font-size: 1rem;
     gap: 10px;
     outline: none;
     border: none;
@@ -268,6 +218,8 @@ export default {
     gap: 20px;
     margin-bottom: 20px;
     .player {
+      background-color: #4529ec;
+      border-radius: 5px;
       display: flex;
       justify-content: center;
       .name {
@@ -291,16 +243,45 @@ export default {
         text-overflow: "";
         font-family: "Orbitron";
         font-weight: 700;
+        font-family: 1rem;
         color: #ffffff;
         background: #4529ec;
         border-radius: 0 5px 5px 0;
         outline: none;
         border: none;
         padding: 17px;
+
+        option {
+          font-size: 2rem;
+        }
       }
 
       #addPlayer {
         border-radius: 5px !important;
+      }
+    }
+  }
+}
+
+.Versus__tableau {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  margin: 0 29px 15px 26px;
+
+  &__player1 {
+    width: 35%;
+
+    h3 {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &:first-child {
+      h3 {
+        justify-content: flex-start;
       }
     }
   }

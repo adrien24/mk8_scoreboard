@@ -20,6 +20,7 @@
                   <option>5</option>
                   <option>6</option>
                   <option>7</option>
+                  <option>8</option>
                   <option>9</option>
                   <option>10</option>
                   <option>11</option>
@@ -95,18 +96,15 @@ export default {
         .get("https://6ooontrv.directus.app/items/scoreboard")
         .then((info) => {
           this.info = info.data.data;
-          console.log(this.info);
         });
     },
 
     callplayer() {
       const players = Array.from(document.querySelectorAll(".player"));
-      console.log(players);
       alert("Les resultats ont été comptabilisé");
       players.forEach((item) => {
         const name = item.querySelector(".name_input").value;
         const score = item.querySelector(".score_input").value;
-        console.log(name, score);
 
         axios
           .get(
@@ -114,12 +112,10 @@ export default {
               name
           )
           .then((player) => {
-            console.log(player);
             this.player = player.data.data[0];
             var nb_count = this.player.Count_mk8;
             var nb_mk8_courses = this.player.Count_mk8_courses;
             var nb_win = this.player.Count_mk8_win;
-            console.log(nb_count, nb_mk8_courses, nb_win);
 
             var integer = parseInt(score);
 
@@ -163,8 +159,7 @@ export default {
                   Count_mk8_win: nb_win,
                 }
               )
-              .then((res) => {
-                console.log(res);
+              .then(() => {
                 this.resetScore();
               });
           });
@@ -182,9 +177,8 @@ export default {
         .post("https://6ooontrv.directus.app/items/scoreboard/", {
           Name: this.playerName,
         })
-        .then((res) => {
+        .then(() => {
           this.call();
-          console.log(res);
         });
     },
   },
